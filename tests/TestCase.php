@@ -17,9 +17,4 @@ abstract class TestCase extends Orchestra
     {
         parent::setUp();
     }
-
-    protected function getEnvironmentSetUp($app)
-    {
-        //
-    }
 }

@@ -7,18 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 class Reference extends Model
 {
     /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = config('references.table_name');
-
-    /**
      * Guarded attributes.
      *
      * @var array
      */
     protected $guarded = [];
+
+    /**
+     * Constructor method.
+     *
+     * @return void
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->table = config('references.table_name');
+    }
 
     /**
      * Gets the referenced model.

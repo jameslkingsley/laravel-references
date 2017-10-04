@@ -14,7 +14,11 @@ class ReferencesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__.'../database/migrations');
+        $this->publishes([
+            __DIR__.'/../config/references.php' => config_path('references.php')
+        ], 'config');
+
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         Route::bind(config('references.binding_name'), function ($hash) {
             return reference($hash);
@@ -28,6 +32,8 @@ class ReferencesServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        require_once __DIR__.'/Helpers.php');
+        $this->mergeConfigFrom(__DIR__.'/../config/references.php', 'references');
+
+        require_once __DIR__.'/Helpers.php';
     }
 }

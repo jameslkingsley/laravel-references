@@ -3,6 +3,7 @@
 namespace Kingsley\References\Test\Unit;
 
 use Kingsley\References\Test\TestCase;
+use Kingsley\References\Test\TestCustomer;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
