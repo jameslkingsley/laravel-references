@@ -20,9 +20,9 @@ class Reference extends Model
      */
     public function __construct(array $attributes = [])
     {
-        parent::__construct($attributes);
-
         $this->table = config('references.table_name');
+
+        parent::__construct($attributes);
     }
 
     /**

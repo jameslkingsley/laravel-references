@@ -2,14 +2,11 @@
 
 namespace Kingsley\References;
 
-use Spatie\Macroable\Macroable;
 use Illuminate\Database\Eloquent\Model;
 use Kingsley\References\Models\Reference;
 
 trait Referenceable
 {
-    use Macroable;
-
     /**
      * Constructor method.
      *
@@ -19,14 +16,7 @@ trait Referenceable
     {
         parent::__construct($attributes);
 
-        $appendedName = config('references.appended_name');
-        $methodName = 'get'.studly_case($appendedName).'Attribute';
-
-        $this->appends[] = $appendedName;
-
-        static::macro($methodName, function () {
-            return optional($this->reference())->hash;
-        });
+        $this->appends[] = 'ref';
     }
 
     /**
@@ -56,7 +46,7 @@ trait Referenceable
     }
 
     /**
-     * Gets the reference factory instance.
+     * Gets the reference for the model.
      *
      * @return Kingsley\References\Models\Reference
      */
@@ -72,12 +62,32 @@ trait Referenceable
      */
     public function makeReferenceHash()
     {
-        if (config('references.prefix')) {
-            $class = strtolower(class_basename(get_class($this)));
-
-            return $class.'_'.str_random(12);
-        } else {
-            return str_random(12);
+        if (property_exists($this, 'referencePrefix')) {
+            if (is_null($this->referencePrefix)) {
+                return str_random(12);
+            } else {
+                return $this->referencePrefix.'_'.str_random(12);
+            }
         }
+
+        if (config('references.prefix')) {
+            $prefix = substr(strtolower(class_basename(get_class($this))), 0, 3);
+
+            return $prefix.'_'.str_random(12);
+        }
+
+        return str_random(12);
+    }
+
+    /**
+     * Gets the ref attribute.
+     *
+     * @return string
+     */
+    public function getRefAttribute()
+    {
+        $ref = $this->reference();
+
+        return $ref ? $ref->hash : null;
     }
 }
