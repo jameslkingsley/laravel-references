@@ -27,7 +27,7 @@ trait Referenceable
     protected static function bootReferenceable()
     {
         static::created(function (Model $model) {
-            $model->references()->save(
+            $model->reference()->save(
                 new Reference([
                     'hash' => $model->makeReferenceHash()
                 ])
@@ -36,23 +36,13 @@ trait Referenceable
     }
 
     /**
-     * Gets the references for the model.
-     *
-     * @return Illuminate\Database\Eloquent\Relations\MorphMany
-     */
-    public function references()
-    {
-        return $this->morphMany(Reference::class, 'model');
-    }
-
-    /**
      * Gets the reference for the model.
      *
-     * @return Kingsley\References\Models\Reference
+     * @return Illuminate\Database\Eloquent\Relations\MorphOne
      */
     public function reference()
     {
-        return $this->references()->first();
+        return $this->morphOne(Reference::class, 'model');
     }
 
     /**
@@ -86,6 +76,6 @@ trait Referenceable
      */
     public function getRefAttribute()
     {
-        return optional($this->reference())->hash;
+        return optional($this->reference)->hash;
     }
 }
