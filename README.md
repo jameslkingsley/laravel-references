@@ -63,3 +63,52 @@ return [
     'prefix' => false,
 ];
 ```
+
+## Usage
+
+Choose the model that you want to make referenceable. In this example I'll choose `Customer`. We'll import the trait and use it in the class.
+
+```php
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use Kingsley\References\Referenceable;
+
+class Customer extends Model
+{
+    use Referenceable;
+}
+```
+
+Now setup your routes to use the binding. Whether you're using a controller or an anonymous function, just type-hint the model class in the arguments to resolve the reference.
+
+```php
+Route::get('/api/customer/{ref}', function (Customer $customer) {
+    return $customer;
+});
+```
+
+When submitting AJAX requests from the client, you can use the `ref` attribute that is appended to the model.
+
+```js
+ajax.delete(`/api/customer/${customer.ref}`);
+```
+
+### Prefixes
+
+If you want to prefix references, just set the `prefix` option to `true` in the config. By default it will use the first three characters of the class' basename.
+
+```php
+App\Customer -> cus_tKCulsB67hty
+```
+
+Alternatively you can explicitly set the prefix for the model by setting the following.
+
+```php
+class Customer extends Model
+{
+    use Referenceable;
+
+    protected $referencePrefix = 'customer';
+}
+```
