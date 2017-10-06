@@ -108,7 +108,7 @@ If you want to prefix references, just set the `prefix` option to `true` in the 
 App\Customer -> cus_tKCulsB67hty
 ```
 
-Alternatively you can explicitly set the prefix for the model by setting the following. Note that if you set it to `null` it won't have a prefix, even if your `prefix` config options is set to `true`.
+Alternatively you can explicitly set the prefix for the model by setting the following. Note that if you set it to `null` it won't have a prefix, even if your `prefix` config option is set to `true`.
 
 ```php
 class Customer extends Model
