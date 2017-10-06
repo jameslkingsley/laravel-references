@@ -18,7 +18,13 @@ class ReferencesServiceProvider extends ServiceProvider
             __DIR__.'/../config/references.php' => config_path('references.php')
         ], 'config');
 
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        if (! class_exists('CreateReferencesTable')) {
+            $this->publishes([
+                __DIR__.'/../database/migrations/create_references_table.php.stub' => database_path(
+                    'migrations/'.date('Y_m_d_His', time()).'_create_references_table.php'
+                )
+            ], 'migrations');
+        }
 
         Route::bind(config('references.binding_name'), function ($hash) {
             return reference($hash);
