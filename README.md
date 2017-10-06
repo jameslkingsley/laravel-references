@@ -1,5 +1,7 @@
 # Drop-in Model References
 
+[![Build Status](https://travis-ci.org/jameslkingsley/laravel-references.svg?branch=master)](https://travis-ci.org/jameslkingsley/laravel-references)
+
 This Laravel >=5.5 package provides a quick and simple way to add unique references to models that can be resolved via route model binding. You usually don't want to expose your primary keys to the client, and without a unique reference such as a username or slug, you can't quickly build a RESTful API. With this package you can give your models a unique reference and instantly start using it in your routes.
 
 Here are a few short examples of what you can do:
