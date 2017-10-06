@@ -64,6 +64,12 @@ return [
 ];
 ```
 
+Now just run the migrations!
+
+```bash
+php artisan migrate
+```
+
 ## Usage
 
 Choose the model that you want to make referenceable. In this example I'll choose `Customer`. We'll import the trait and use it in the class.
@@ -71,8 +77,8 @@ Choose the model that you want to make referenceable. In this example I'll choos
 ```php
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Kingsley\References\Referenceable;
+use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
