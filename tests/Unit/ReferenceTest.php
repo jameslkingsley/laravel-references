@@ -2,6 +2,7 @@
 
 namespace Kingsley\References\Test\Unit;
 
+use Illuminate\Support\Facades\Route;
 use Kingsley\References\Test\TestCase;
 use Kingsley\References\Test\TestCustomer;
 
@@ -23,15 +24,5 @@ class ReferenceTest extends TestCase
         $resolved = reference($customer->ref);
 
         $this->assertTrue($customer->id === $resolved->id);
-    }
-
-    /** @test */
-    public function resolveRouteModelBinding()
-    {
-        $customer = TestCustomer::create();
-
-        $response = $this->get("/api/laravel-references/{$customer->ref}");
-
-        $response->assertJson($customer->toArray());
     }
 }

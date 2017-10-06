@@ -23,13 +23,6 @@ class ReferencesServiceProvider extends ServiceProvider
         Route::bind(config('references.binding_name'), function ($hash) {
             return reference($hash);
         });
-
-        if (config('app.env') === 'testing') {
-            Route::get(
-                '/api/laravel-references/{ref}',
-                'Kingsley\References\Test\TestReferenceController@index'
-            );
-        }
     }
 
     /**
