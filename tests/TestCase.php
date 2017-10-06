@@ -49,7 +49,7 @@ abstract class TestCase extends Orchestra
             $table->timestamps();
         });
 
-        include_once __DIR__.'/../database/migrations/create_references_table.php';
+        include_once __DIR__.'/../database/migrations/2017_10_06_100000_create_references_table.php';
         (new \CreateReferencesTable)->up();
     }
 }
