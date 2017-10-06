@@ -109,6 +109,7 @@ App\Customer -> cus_tKCulsB67hty
 ```
 
 Alternatively you can explicitly set the prefix for the model by setting the following.
+
 **If you set it to `null` then it won't have a prefix, even if your config is set to `true`.**
 
 ```php
