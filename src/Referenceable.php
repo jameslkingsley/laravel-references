@@ -86,8 +86,6 @@ trait Referenceable
      */
     public function getRefAttribute()
     {
-        $ref = $this->reference();
-
-        return $ref ? $ref->hash : null;
+        return optional($this->reference())->hash;
     }
 }
