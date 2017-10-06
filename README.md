@@ -99,7 +99,7 @@ Route::get('/api/customer/{ref}', function (Customer $customer) {
 When submitting AJAX requests from the client, you can use the `ref` attribute that is appended to the model.
 
 ```js
-ajax.delete(`/api/customer/${customer.ref}`);
+ajax.get(`/api/customer/${customer.ref}`);
 ```
 
 ### Prefixes
