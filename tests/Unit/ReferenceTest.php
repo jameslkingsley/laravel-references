@@ -5,6 +5,7 @@ namespace Kingsley\References\Test\Unit;
 use Illuminate\Support\Facades\Route;
 use Kingsley\References\Test\TestCase;
 use Kingsley\References\Test\TestCustomer;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ReferenceTest extends TestCase
 {
@@ -24,5 +25,13 @@ class ReferenceTest extends TestCase
         $resolved = reference($customer->ref);
 
         $this->assertTrue($customer->id === $resolved->id);
+    }
+
+    /** @test */
+    public function exceptionIsThrownIfNotFound()
+    {
+        $this->expectException(ModelNotFoundException::class);
+
+        reference('test');
     }
 }

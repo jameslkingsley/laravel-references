@@ -1,6 +1,7 @@
 <?php
 
 use Kingsley\References\Models\Reference;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
  * Resolves the given reference hash to its model.
@@ -10,7 +11,7 @@ use Kingsley\References\Models\Reference;
 function reference(string $hash)
 {
     if (! $ref = Reference::where('hash', $hash)->first()) {
-        throw new InvalidArgumentException("Reference '{$hash}' does not exist.");
+        throw new ModelNotFoundException("Reference '{$hash}' does not exist.");
     }
 
     return $ref->referenced();
